@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+void primeNumberCheck(int givenNumber)
+{
+    bool isAPrimeNumber = true;
+
+    if (givenNumber <= 1)
+    {
+        isAPrimeNumber = false;
+    }
+
+    for (int i = 2; i <= (givenNumber / 2); i++)
+    {
+        if (givenNumber % i == 0)
+        {
+            isAPrimeNumber = false;
+        }
+    }
+
+    if (isAPrimeNumber == true)
+    {
+        printf("%d is a prime number\n", givenNumber);
+    }
+}
+
+int main()
+{
+    //защита от дурака
+    int givenNumber;
+    char characterCheck;
+    if (scanf_s("%d%c", &givenNumber, &characterCheck) != 2 || characterCheck != '\n')
+    {
+        printf("Incorrect input\n");
+    }
+    else
+    {
+
+        for (int currentNumber = 1; currentNumber < givenNumber; currentNumber++)
+        {
+            primeNumberCheck(currentNumber);
+        }
+    }
+    
+}
