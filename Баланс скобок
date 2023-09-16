@@ -1,0 +1,50 @@
+#include <stdio.h>
+
+int stringLength(char string[])
+{
+    int length;
+    for (length = 0; string[length] != '\0'; length++);
+
+    return length;
+}
+
+void bracketCheck(char text[], char openningBracket, char closingBracket)
+{
+    int bracketCount = 0;
+    int textLength = stringLength(text);
+
+    for (int position = 0; position < textLength; position++)
+    {
+        if (text[position] == openningBracket)
+        {
+            bracketCount++;
+        }
+        if (text[position] == closingBracket)
+        {
+            bracketCount--;
+        }
+
+        if (bracketCount < 0)
+        {
+            printf("The string has incorrect type %c%c bracket placement\n", openningBracket, closingBracket);
+            break;
+        }
+    }
+
+    if (bracketCount == 0)
+    {
+        printf("The string has correct type %c%c bracket placement\n", openningBracket, closingBracket);
+    }
+}
+
+int main()
+{
+    char text[] = "sample text ((()())) >>>> {}{}{} [][][][]]]";
+
+    printf("%s\n\n", text); //добавлено, чтобы легче сверять скобки
+
+    bracketCheck(text, '(', ')');
+    bracketCheck(text, '<', '>');
+    bracketCheck(text, '[', ']');
+    bracketCheck(text, '{', '}');
+}
