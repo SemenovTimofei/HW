@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+int stringLength(char string[])
+{
+    int length;
+    for (length = 0; string[length] != '\0'; length++);
+
+    return length;
+}
+
+int main()
+{
+    char mainString[] = "this is good, hood, goodies, god";
+    char subString[] = "good";
+    
+    int substringLength = stringLength(subString);
+    int mainStringLength = stringLength(mainString);
+    int entryCount = 0;
+    
+    for (int mainStringPosition = 0; mainStringPosition < mainStringLength; mainStringPosition++)
+    {
+        bool substringEntryCheck = true;
+
+        int substringPosition = 0;
+
+        while (substringPosition < substringLength)
+        {
+            if (subString[substringPosition] != mainString[mainStringPosition])
+            {
+                substringEntryCheck = false;
+                break;
+            }
+
+            mainStringPosition++;
+            substringPosition++;
+        }
+
+        if (substringEntryCheck == true)
+        {
+            entryCount++;
+        }
+    }
+    
+    printf("The main string has %d entries of given substring", entryCount);
+}
