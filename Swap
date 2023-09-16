@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main()
+{
+    //это защита от дурака для первого числа (пока что не придумал, как сделать в виде отдельной функции)
+    int firstNumber;
+    char characterCheck;
+    if (scanf_s("%d%c", &firstNumber, &characterCheck) != 2 || characterCheck != '\n')
+    {
+        printf("Incorrect input\n");
+    }
+    else
+    {
+        //защита от дурака для второго числа
+        int secondNumber;
+        if (scanf_s("%d%c", &secondNumber, &characterCheck) != 2 || characterCheck != '\n')
+        {
+            printf("Incorrect input\n");
+        }
+        else
+        {
+            //основная часть, меняющая местами числа
+            printf("The first number is %d and the second number is %d\n", firstNumber, secondNumber);
+
+            firstNumber += secondNumber;
+            secondNumber = firstNumber - secondNumber;
+            firstNumber -= secondNumber;
+
+            printf("Now the first number is %d and the second number is %d", firstNumber, secondNumber);
+        }
+    }
+}
