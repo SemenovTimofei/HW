@@ -1,0 +1,68 @@
+#include <stdio.h>
+
+int main()
+{
+    //защита от дурака для делителя (пока что еще не получается создать как отдельную функцию)
+    int dividend;
+    char characterCheck;
+    if (scanf_s("%d%c", &dividend, &characterCheck) != 2 || characterCheck != '\n')
+    {
+        printf("Incorrect input\n");
+    }
+    else
+    {
+        //защита от дурака для знаменателя
+        int divisor;
+        if (scanf_s("%d%c", &divisor, &characterCheck) != 2 || characterCheck != '\n' || divisor == 0)
+        {
+            printf("Incorrect input\n");
+        }
+        else
+        {
+            //главная часть кода
+            int remainder;
+            int variableDividend = dividend;
+
+            if ((dividend > 0) && (divisor > 0))
+            {
+                while (variableDividend >= 0)
+                {
+                    if (variableDividend - divisor <= 0)
+                    {
+                        remainder = variableDividend;
+                    }
+
+                    variableDividend -= divisor;
+                }
+            }
+
+            if ((dividend < 0) && (divisor > 0))
+            {
+                while (variableDividend < 0)
+                {
+                    if (variableDividend + divisor >= 0)
+                    {
+                        remainder = variableDividend + divisor;
+                    }
+
+                    variableDividend += divisor;
+                }
+            }
+
+            if ((dividend < 0) && (divisor < 0))
+            {
+                while (variableDividend < 0)
+                {
+                    if (variableDividend - divisor >= 0)
+                    {
+                        remainder = variableDividend - divisor;
+                    }
+
+                    variableDividend -= divisor;
+                }
+            }
+
+            printf("%d is the remainder of %d divided by %d", remainder, dividend, divisor);
+        }
+    }
+}
