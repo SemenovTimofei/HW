@@ -2,7 +2,7 @@
 
 int main()
 {
-    // это защита от дурака для первого числа (пока что не придумал, как сделать в виде отдельной функции)
+    // защита от дурака для первого числа
     int firstNumber = 0;
     char characterCheck = "";
     scanf_s("%d%c", &firstNumber, &characterCheck);
