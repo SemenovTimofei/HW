@@ -24,7 +24,7 @@ int main()
         return 0;
     }
 
-    //главная часть кода
+    // главная часть кода
     int remainder;
     int variableDividend = dividend;
     if ((dividend > 0) && (divisor > 0))
