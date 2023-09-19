@@ -26,19 +26,18 @@ void primeNumberCheck(int givenNumber)
 
 int main()
 {
-    //защита от дурака
-    int givenNumber;
-    char characterCheck;
-    if (scanf_s("%d%c", &givenNumber, &characterCheck) != 2 || characterCheck != '\n')
+    int givenNumber = 0;
+    char characterCheck = "";
+    scanf_s("%d%c", &givenNumber, &characterCheck);
+
+    if (characterCheck != '\n')
     {
         printf("Incorrect input\n");
+        return 0;
     }
-    else
-    {
 
-        for (int currentNumber = 1; currentNumber < givenNumber; currentNumber++)
-        {
-            primeNumberCheck(currentNumber);
-        }
+    for (int currentNumber = 1; currentNumber < givenNumber; currentNumber++)
+    {
+        primeNumberCheck(currentNumber);
     }
 }
