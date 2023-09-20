@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+bool primeNumberCheck(int givenNumber)
+{
+    bool isAPrimeNumber = true;
+
+    if (givenNumber <= 1)
+    {
+        isAPrimeNumber = false;
+    }
+
+    for (int i = 2; i <= givenNumber / 2; i++)
+    {
+        if (givenNumber % i == 0)
+        {
+            isAPrimeNumber = false;
+        }
+    }
+
+    return isAPrimeNumber;
+}
+
+bool testCorrectCase()
+{
+    return primeNumberCheck(5);
+}
+
+bool testIncorrectCases()
+{
+    return !primeNumberCheck(0) && !primeNumberCheck(4) && !primeNumberCheck(-3);
+}
+
+
+void main()
+{
+    if (!testCorrectCase() || !testIncorrectCases())
+    {
+        printf("Tests failed\n");
+        return;
+    }
+
+    // главная часть
+    printf("Enter a number\n");
+
+    int givenNumber = 0;
+    char characterCheck = "";
+    scanf_s("%d%c", &givenNumber, &characterCheck);
+
+    if (characterCheck != '\n')
+    {
+        printf("Incorrect input\n");
+        return 0;
+    }
+
+    if (givenNumber <= 2)
+    {
+        printf("There are no prime numbers that come before %d\n", givenNumber);
+    }
+
+    for (int currentNumber = 1; currentNumber < givenNumber; currentNumber++)
+    {
+        if (primeNumberCheck(currentNumber)) {
+            printf("%d is a prime number\n", currentNumber);
+        }
+    }
+}
