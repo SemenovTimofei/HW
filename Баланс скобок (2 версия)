@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+bool bracketCheck(const char text[])
+{
+    int bracketCount = 0;
+    const int textLength = strlen(text);
+
+    for (int position = 0; position < textLength; position++)
+    {
+        if (text[position] == '(')
+        {
+            bracketCount++;
+        }
+        if (text[position] == ')')
+        {
+            bracketCount--;
+        }
+
+        if (bracketCount < 0)
+        {
+            return 0;
+            break;
+        }
+    }
+
+    if (bracketCount == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+bool testCorrectCase()
+{
+    return bracketCheck("()");
+}
+
+bool testIncorrectCases()
+{
+    return !bracketCheck("((") && !bracketCheck(")(");
+}
+
+void main()
+{
+    if (!testCorrectCase() || !testIncorrectCases())
+    {
+        printf("Tests failed\n");
+        return;
+    }
+
+    printf("Enter string\n");
+    char text[] = "sample text";
+    scanf_s("%s", text, 10); // я не знаю, сколько надо выделять памяти 
+
+    if (bracketCheck(text))
+    {
+        printf("%s has correct parentheses placement", text);
+    }
+    else
+    {
+        printf("%s has incorrect parentheses placement", text);
+    }
+}
