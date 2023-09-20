@@ -41,7 +41,7 @@ bool testCorrectCase()
 
 bool testIncorrectCases()
 {
-    return !bracketCheck("((") && !bracketCheck(")(");
+    return !bracketCheck("((") && !bracketCheck(")(") && !bracketCheck("))");
 }
 
 void main()
