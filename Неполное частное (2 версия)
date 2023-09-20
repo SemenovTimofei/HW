@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+int remainderCalculate(const int dividendCheck, const int divisorCheck)
+{
+    int remainder = 0;
+    int dividend = abs(dividendCheck);
+    int divisor = abs(divisorCheck);
+
+    while (dividend >= 0)
+    {
+        if (dividend < divisor)
+        {
+            remainder = dividend;
+        }
+        dividend -= divisor;
+    }
+
+    if (dividendCheck < 0 || divisorCheck < 0)
+    {
+        remainder = divisor - remainder;
+    }
+
+    return remainder;
+}
+
+bool testCorrectCases()
+{
+    return remainderCalculate(78, 33) == 12 && remainderCalculate(-78, 33) == 12; // пример деления отрицательных чисел взят с Википедии "Деление с остатком"
+}
+
+bool testIncorrectCases()
+{
+    return !remainderCalculate(78, 33) == 21 && !remainderCalculate(12, 5) == 0;
+}
+
+int main()
+{
+    if (!testCorrectCases || !testIncorrectCases)
+    {
+        printf("Tests failed\n");
+        return;
+    }
+
+    printf("Input dividend\n");
+    int dividend = 0;
+    char characterCheck = '\0';
+    scanf_s("%d%c", &dividend, &characterCheck);
+
+    if (characterCheck != '\n')
+    {
+        printf("Incorrect input\n");
+        return 0;
+    }
+
+    printf("Input divisor\n");
+    int divisor = 0;
+    characterCheck = '\0';
+    scanf_s("%d%c", &divisor, &characterCheck);
+
+    if (characterCheck != '\n')
+    {
+        printf("Incorrect input\n");
+        return;
+    }
+
+    if (divisor == 0)
+    {
+        printf("Cannot divide by zero");
+        return;
+    }
+
+    if (dividend > 0 && divisor < 0)
+    {
+        printf("Division of a positive number by a negative number has no remainder");
+        return;
+    }
+
+    printf("%d is the remainder of %d divided by %d", remainderCalculate(dividend, divisor), dividend, divisor);
+}
