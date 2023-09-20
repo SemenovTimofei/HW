@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+int stringEntries()
+{
+    char mainString[] = "this is good, hood, goodies, god";
+    char subString[] = "good";
+
+    const int substringLength = strlen(subString);
+    const int mainStringLength = strlen(mainString);
+    int entryCount = 0;
+
+    for (int mainStringPosition = 0; mainStringPosition < mainStringLength; mainStringPosition++)
+    {
+        bool substringEntryCheck = true;
+
+        int substringPosition = 0;
+
+        while (substringPosition < substringLength)
+        {
+            if (subString[substringPosition] != mainString[mainStringPosition])
+            {
+                substringEntryCheck = false;
+                break;
+            }
+
+            mainStringPosition++;
+            substringPosition++;
+        }
+
+        if (substringEntryCheck == true)
+        {
+            entryCount++;
+        }
+    }
+
+    return entryCount;
+}
+
+
+bool testingStringEntry(int entryCount)
+{
+    if (stringEntries() == entryCount)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+
+bool testCorrectCase()
+{
+    return testingStringEntry(2);
+}
+
+bool testIncorrectCases()
+{
+    return !testingStringEntry(-1) && !testingStringEntry(0) && !testingStringEntry(3);
+}
+
+
+void main()
+{
+    if (!testCorrectCase() || !testIncorrectCases()) 
+    {
+        printf("Tests failed\n");
+        return;
+    }
+
+    printf("The main string has %d entries of substring", stringEntries());
+}
