@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+int nullElementCount()
+{
+    int numberArray[] = { 0, 0, -1, 0, 1, 2, 3, 1, 20, 12};
+    const int arrayLength = sizeof(numberArray) / sizeof(numberArray[0]);
+    int nullArrayElementCount = 0;
+
+    for (int currentArrayPosition = 0; currentArrayPosition < arrayLength; currentArrayPosition++)
+    {
+        if (numberArray[currentArrayPosition] == 0)
+        {
+            nullArrayElementCount++;
+        }
+    }
+
+    return nullArrayElementCount;
+}
+
+
+bool testCorrectCase()
+{
+    return nullElementCount() == 3;
+}
+
+bool testIncorrectCases()
+{
+    return !(nullElementCount() == -1) && !(nullElementCount() == 2);
+}
+
+
+int main()
+{if (!testCorrectCase() || !testIncorrectCases())
+    {
+        printf("Tests failed\n");
+        return;
+    }
+
+    printf("The array has %d null elements", nullElementCount());
+}
