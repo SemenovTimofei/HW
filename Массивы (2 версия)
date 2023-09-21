@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+void flipArray(int n, int m, char* array)
+{
+    int segmentPosition = n;
+    while (segmentPosition < n + (m - n) / 2)
+    {
+        char temporaryCharacter = array[segmentPosition];
+        array[segmentPosition] = array[n + m - segmentPosition - 1];
+        array[n + m - segmentPosition - 1] = temporaryCharacter;
+        segmentPosition++;
+    }
+}
+
+bool testCorrectCase()
+{
+    char array[] = "ABCDEF123456";
+    int firstSegmentLength = 6;
+    flipArray(0, firstSegmentLength, array);
+    flipArray(firstSegmentLength, strlen(array), array);
+    flipArray(0, strlen(array), array);
+
+    char checkArray[] = "123456ABCDEF";
+
+    for (int i = 0; i < strlen(array); i++)
+    {
+        if (array[i] != checkArray[i])
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool testIncorrectCase()
+{
+    char array[] = "ABCDEF123456";
+    int firstSegmentLength = 6;
+    flipArray(0, firstSegmentLength, array);
+    flipArray(firstSegmentLength, strlen(array), array);
+    flipArray(0, strlen(array), array);
+
+    char checkArray[] = "ABCDEF123456";
+
+    for (int i = 0; i < strlen(array); i++)
+    {
+        if (array[i] != checkArray[i])
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+int main()
+{
+    if (!testCorrectCase() || !testIncorrectCase())
+    {
+        printf("Tests failed\n");
+        return;
+    }
+    
+    char array[] = "ABCDEF123456";
+    printf("%s is the original string\n", array);
+    int firstSegmentLength = 6;
+
+    flipArray(0, firstSegmentLength, array);
+    printf("%s - the first segment has been flipped\n", array);
+
+    flipArray(firstSegmentLength, strlen(array), array);
+    printf("%s - the second segment has been flipped\n", array);
+
+    flipArray(0, strlen(array), array);
+    printf("%s - the string has been flipped completely", array);
+}
